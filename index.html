@@ -1,0 +1,88 @@
+<html>
+<head>
+
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./app.css">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-route.min.js"></script>
+    <!--firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase-auth.js"></script>
+
+    <!-- AngularFire -->
+    <script src="https://cdn.firebase.com/libs/angularfire/2.3.0/angularfire.min.js"></script>
+
+
+    <!--Facebook-->
+    <script>
+        var config = {
+            apiKey: "AIzaSyCMGAwE2t_6EHLGiz6pcp6vyvZSgfvPweE",
+            authDomain: "inf551-project-10723.firebaseapp.com",
+            databaseURL: "https://inf551-project-10723.firebaseio.com",
+            projectId: "inf551-project-10723",
+            storageBucket: "inf551-project-10723.appspot.com",
+            messagingSenderId: "373729871136"
+        };
+        firebase.initializeApp(config);
+    </script>
+    <!--<div id="fb-root"></div>-->
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=429448340817394&autoLogAppEvents=1';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+    <script src="./app.js"></script>
+</head>
+
+<body ng-app="app" ng-controller="RootController">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top justify-content-between">
+    <a class="navbar-brand" href="#">Comic Book</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup" ng-if="user.name != undefined">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" ng-class="{'active': studio == 'dc'}" href="/#!/comics/dc" ng-click="studio='dc'">DC <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" ng-class="{'active': studio == 'marvel'}" ng-click="studio='marvel'" href="/#!/comics/marvel">Marvel <span class="sr-only">(current)</span></a>
+        </div>
+    </div>
+
+    <form class="form-inline my-2 my-lg-0" ng-if="user.name != undefined">
+        <span class="navbar-text mr-sm-2" >{{user.name}}</span>
+        <button class="btn btn-outline-danger my-2 my-sm-0" ng-if="user" ng-click="logout()">Logout</button>
+    </form>
+    <!--<ul class="navbar-nav mr-auto">-->
+        <!--<li class="nav-item active">-->
+            <!--<a class="nav-link disabled" href="#/comics">{{user.name}}</a>-->
+        <!--</li>-->
+        <!--<li class="nav-item active">-->
+            <!--<a class="nav-link disabled" ng-if="user" ng-click="logout()">Logout</a>-->
+        <!--</li>-->
+    <!--</ul>-->
+
+
+</nav>
+
+    <div ng-view></div>
+
+</body>
+</html>
+
+<!-- /input-group -->
